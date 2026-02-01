@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+    <title>Will You Be My Valentine? ❤️</title>
     <style>
         body {
             margin: 0;
@@ -13,8 +13,8 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: linear-gradient(135deg, #ffebee 0%, #fce4ec 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             overflow: hidden;
             text-align: center;
         }
@@ -22,59 +22,59 @@
         h1 {
             color: #d32f2f;
             font-size: 2.5rem;
-            margin-bottom: 20px;
+            z-index: 100;
+            pointer-events: none;
         }
 
-        .container {
-            position: relative;
-            width: 100%;
-            height: 300px;
+        .main-buttons {
+            display: flex;
+            gap: 20px;
+            z-index: 100;
         }
 
         button {
             padding: 15px 35px;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            position: absolute;
-            transition: all 0.3s ease;
+            transition: transform 0.2s;
         }
 
         #yesBtn {
             background-color: #ff4081;
             color: white;
-            left: 50%;
-            transform: translateX(-120%);
-            z-index: 10;
         }
 
-        #noBtn {
+        #yesBtn:hover {
+            transform: scale(1.2);
+        }
+
+        .no-clone {
             background-color: #757575;
             color: white;
-            left: 50%;
-            transform: translateX(20%);
+            position: fixed;
+            z-index: 50;
+            pointer-events: auto;
         }
 
-        /* Success Screen Styles */
         #success {
             display: none;
-            animation: fadeIn 0.8s ease-in;
+            z-index: 200;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .meme-img {
-            max-width: 90%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-top: 20px;
+        .meme-gif {
+            width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
@@ -82,37 +82,53 @@
 
     <div id="quiz">
         <h1>Will you be my Valentine? ❤️</h1>
-        <div class="container">
+        <div class="main-buttons">
             <button id="yesBtn" onclick="celebrate()">YES</button>
-            <button id="noBtn" onmouseover="moveButton()">NO</button>
+            <button id="noBtn" onmouseover="multiplyNo()">NO</button>
         </div>
     </div>
 
     <div id="success">
-        <h1>YAYYY! I KNEW IT! 🥰❤️</h1>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpqcWp6emJqZzZqZzZqZzZqZzZqZzZqZzZqZzZqZzZqZzZqJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/ICOgUNoMPvGDINDqCc/giphy.gif" alt="Happy Cat" class="meme-img">
+        <h1>YAYYY! I LOVE YOU! 🥰✨</h1>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpqcWp6emJqZzZqZzZqZzZqZzZqZzZqZzZqZzZqZzZqZzZqJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/ICOgUNoMPvGDINDqCc/giphy.gif" class="meme-gif">
     </div>
 
     <script>
-        function moveButton() {
-            const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - 150);
-            const y = Math.random() * (window.innerHeight - 100);
-            
-            btn.style.position = 'fixed';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-            
-            // Make "Yes" button grow every time she misses "No"
-            const yes = document.getElementById('yesBtn');
-            const currentSize = parseFloat(window.getComputedStyle(yes).fontSize);
-            yes.style.fontSize = (currentSize + 2) + 'px';
+        function multiplyNo() {
+            // Create multiple "No" buttons all over the screen
+            for(let i = 0; i < 5; i++) {
+                const clone = document.createElement('button');
+                clone.innerText = "NO";
+                clone.className = 'no-clone';
+                
+                // Random position
+                const x = Math.random() * (window.innerWidth - 100);
+                const y = Math.random() * (window.innerHeight - 50);
+                
+                clone.style.left = x + 'px';
+                clone.style.top = y + 'px';
+                
+                // Make the clone also trigger more clones
+                clone.onmouseover = multiplyNo;
+                
+                document.body.appendChild(clone);
+            }
+
+            // Move the original "No" button too
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+            noBtn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
         }
 
         function celebrate() {
             document.getElementById('quiz').style.display = 'none';
+            // Remove all the fake No buttons
+            const clones = document.querySelectorAll('.no-clone');
+            clones.forEach(c => c.remove());
+            
             document.getElementById('success').style.display = 'block';
-            document.body.style.backgroundColor = '#f8bbd0';
+            document.body.style.background = "#ffc1e3";
         }
     </script>
 </body>
