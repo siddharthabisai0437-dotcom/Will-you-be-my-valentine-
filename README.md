@@ -2,67 +2,69 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Valentine's Day</title>
+  <title>Be My Valentine ❤️</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      background-color: pink;
-      margin-top: 100px;
+      background: linear-gradient(to right, #ff9a9e, #fecfef);
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
     }
     h1 {
-      color: red;
+      color: #d10056;
+      margin-top: 100px;
+      font-size: 3em;
+      text-shadow: 2px 2px #fff0f5;
     }
     .btn {
-      padding: 15px 30px;
-      font-size: 18px;
+      padding: 15px 40px;
+      font-size: 20px;
       margin: 20px;
       border: none;
-      border-radius: 8px;
+      border-radius: 25px;
       cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.1);
     }
     .yes {
-      background-color: #ff4d4d;
+      background-color: #ff3366;
       color: white;
+      box-shadow: 0 0 15px #ff6699;
     }
     .no {
-      background-color: #ccc;
-      color: black;
+      background-color: #fff;
+      color: #333;
       position: absolute;
+      border: 2px solid #ff3366;
+      border-radius: 25px;
     }
     #meme {
       display: none;
       margin-top: 30px;
+      animation: fadeIn 2s ease-in-out;
     }
     #meme img {
       max-width: 300px;
-      border-radius: 10px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #ff6699;
     }
-  </style>
-</head>
-<body>
-  <h1>Will you be my Valentine? ❤️</h1>
-  <button class="btn yes" onclick="showMeme()">Yes</button>
-  <button class="btn no" id="noBtn">No</button>
-
-  <div id="meme">
-    <h2>Yay! 🥰</h2>
-    <img src="https://i.imgur.com/0D0MZcC.png" alt="Cute Happy Meme">
-  </div>
-
-  <script>
-    const noBtn = document.getElementById("noBtn");
-
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.floor(Math.random() * (window.innerWidth - 100));
-      const y = Math.floor(Math.random() * (window.innerHeight - 50));
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
-
-    function showMeme() {
-      document.getElementById("meme").style.display = "block";
+    #meme h2 {
+      color: #d10056;
+      font-size: 2em;
     }
-  </script>
-</body>
-</html>
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 24px;
+      animation: floatUp 6s infinite;
+    }
+    @keyframes floatUp {
