@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffebee;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+        h1 { color: #d32f2f; }
+        .buttons { margin-top: 20px; position: relative; width: 100%; height: 100px; }
+        #yesBtn {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        #noBtn {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            position: absolute;
+            transition: 0.1s;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Will you be my Valentine? ❤️</h1>
+    <div class="buttons">
+        <button id="yesBtn" onclick="celebrate()">Yes!</button>
+        <button id="noBtn" onmouseover="moveButton()">No</button>
+    </div>
+
+    <script>
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function celebrate() {
+            document.body.innerHTML = "<h1>Yay! I knew you'd say yes! 💖🌹</h1><p style='font-size: 50px;'>🥰</p>";
+        }
+    </script>
+</body>
+</html>
